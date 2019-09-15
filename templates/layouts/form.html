@@ -3,19 +3,27 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="/static/js/main.js"></script>
         <title>WUP</title>
     </head>
+
     <body>
-        <h1>WUP</h1>
+        <center>
+            <h1>WUP</h1>
+            <form action="/data" method="POST">
+                Select date: <input type="date" action="/data" name="date"><br>
+                Select movement: <input type="text" name="lift_name"><br>
+                <input type="submit" value="Submit">
+            </form>
+        </center>
         <form action="/data" method="POST">
-            Select date: <input type="date" action="/data" name="date"><br>
-            Select movement: <input type="text" name="lift_name"><br>
-            <input type="submit" value="Submit">
+            <div class="form-group">
+                <input type="checkbox" name="isPrimMove">Primary Movement<br>
+                <label for="exampleFormControlSelect1">Movement</label>
+                <select class="form-control" name="movementSelector"></select>
+            </div>
         </form>
-
-
-
-
 
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

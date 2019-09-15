@@ -10,11 +10,12 @@ def post_data():
     if request.method == 'POST':
         date = request.form.get('date')
         lift_name = request.form.get('lift_name')
+        print(request.form)
         return f'Date: {date} Lift: {lift_name}'
 
 @app.route('/')
 def main_handler():
-    return render_template('form.html')
+    return render_template('layouts/form.html')
 
 if __name__ == '__main__':
     fh = open('db.json', 'w+')
