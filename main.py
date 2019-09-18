@@ -1,22 +1,10 @@
-import sqlite3
-from flask import Flask, request, render_template
-import os
-import json
+from flask import Flask, render_template
 
-app = Flask(__name__, template_folder='templates')
-
-@app.route('/data', methods=['POST', 'GET'])
-def post_data():
-    if request.method == 'POST':
-        date = request.form.get('date')
-        lift_name = request.form.get('lift_name')
-        print(request.form)
-        return f'Date: {date} Lift: {lift_name}'
+app = Flask(__name__)
 
 @app.route('/')
-def main_handler():
-    return render_template('layouts/form.html')
+def root():
+    return render_template('index.html')
 
 if __name__ == '__main__':
-    fh = open('db.json', 'w+')
-    app.run(debug=True, port=5000)
+    app.run(host='127.0.0.1', port=5000, debug=True)
