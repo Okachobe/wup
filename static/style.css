@@ -1,4 +1,9 @@
 body {
     font-family: "helvetica", sans-serif;
     text-align: center;
+    color: white;
+}
+
+div, .btn, table, tr, th, td {
+    color: white;
 }
