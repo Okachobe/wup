@@ -3,29 +3,81 @@
 
 {% block body %}
 {% include "back_button.html" %}
-<div class="controls">
-    <form class="sucess-none form form-horizontal" id="addSet">
-        <div class="form-group"><div class="col-md-3"><fieldset>
-            <legend>Personal information:</legend>
-            Name:<br>
-            <input type="text" id="name" class="form-control" value="Asher"><br>
-            Date:<br>
-            <input class="form-control" type="date" id="date"><br>
-            Lift:<br>
-            <select class="form-control" id="lift">
-                <option value="db_bench">DB Bench</option>
-                <option value="db_ohp">DB OHP</option>
-                <option value="db_row">DB Row</option>
-                <option value="pull_ups">Pull Ups</option>
-                <option value="leg_press">Leg Press</option>
-                <option value="db_rdl">DB RDL</option>
-            </select><br>
-            Weight:<br>
-            <input type="number" id="weight" class="form-control" value="0"><br>
-            Reps:<br>
-            <input type="number" id="reps" class="form-control" value="0"><br>
-            <input type="submit" class="bg-dark form-control btn" value="Submit">
-        </fieldset></div></div>
-    </form>
+<div class="container">
+    <div id="mainbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info">
+
+            <div class="panel-body">
+                <form class="sucess-none form form-horizontal" id="addSet">
+
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            Name:<br>
+                            <select class="form-control" id="name">
+                                <option value="asher_mancinelli">Asher Mancinelli</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            Date:<br>
+                            <input class="form-control" type="date" id="date"><br>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            Lift:<br>
+                            <select class="form-control" id="lift">
+                                <optgroup label="Primary">
+                                    <option value="db_bench">DB Bench</option>
+                                    <option value="db_ohp">DB OHP</option>
+                                    <option value="db_row">DB Row</option>
+                                    <option value="pull_ups">Pull Ups</option>
+                                    <option value="leg_press">Leg Press</option>
+                                    <option value="db_rdl">DB RDL</option>
+                                </optgroup>
+                                <optgroup label="Supplementary">
+                                    <option>Dips</option>
+                                    <option>Static DB Holds</option>
+                                    <option>Lateral Raise</option>
+                                    <option>Lateral Pull Down</option>
+                                    <option>EZ Bar Curl</option>
+                                    <option>DB Trap Raise</option>
+                                    <option>DB Lunges</option>
+                                    <option>SL Curls</option>
+                                    <option>SL Extentions</option>
+                                    <option>Crunch Variation</option>
+                                </optgroup>
+                            </select><br>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            Weight:<br>
+                            <input type="number" id="weight" class="form-control" value="0"><br>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            Reps:<br>
+                            <input type="number" id="reps" class="form-control" value="0"><br>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <input type="submit" class="bg-dark form-control btn" value="Submit">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

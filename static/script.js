@@ -1,6 +1,7 @@
 'use strict'; 
 window.addEventListener('load', () => { 
     var b = firebase.database().ref("set");
+    $("#date").datepicker().datepicker('setDate', new Date());
     if ($('#addSet').length > 0) {
         $("#addSet").submit((a) => {
             $(this), console.log("Pushing to firebase");
