@@ -2,3 +2,11 @@ body {
     font-family: "helvetica", sans-serif;
     text-align: center;
 }
+.form-control-inline {
+    min-width: 0;
+    width: auto;
+    display: inline;
+}
+.form-control {
+    width: 100px;
+}

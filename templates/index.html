@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>WUP</title>
-        <script src="{{url_for('static', filename='script.js')}}"></script>
-        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
-    </head>
-    <body>
-        <h1>Temporary title</h2>
-    </body>
-</html>
+{% extends "layout.html" %}
+
+{% block title %} WUP {% endblock %}
+
+{% block body %}
+<main role="main" class="inner-cover">
+    <h1 class="cover-heading">Choose what you'd like to do:</h1>
+    <p class="lead">
+        You may either see data recently entered or you may enter new data.
+    </p>
+    <p class="lead">
+        <a href="add_set" class="btn btn-lg btn-secondary">Add Data</a>
+        <a href="view_all" class="btn btn-lg btn-secondary">View Data</a>
+    </p>
+</main>
+{% endblock %}

@@ -1,0 +1,43 @@
+
+{% extends "layout.html" %}
+
+{% block title %} View Data {% endblock %}
+
+{% block body %}
+<table class="table" style="width:100%" id="datatable">
+    <tr id="header-row">
+        <th>Name</th>
+        <th>Date</th>
+        <th>Lift</th>
+        <th>Weight</th>
+        <th>Reps</th>
+    </tr>
+</table>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var db = firebase.database();
+        db.ref().once('value', (snapshot) => {
+            if (snapshot.exists()) {
+                var content = '';
+                console.log(snapshot);
+                snapshot.forEach((_data) => {
+                    var data = _data.val();
+                    console.log(data);
+                    for (var k in data) {
+                        val = data[k];
+                        content += '<tr>';
+                        content += '<td>' + val.name + '</td>';
+                        content += '<td>' + val.date + '</td>';
+                        content += '<td>' + val.lift + '</td>';
+                        content += '<td>' + val.weight + '</td>';
+                        content += '<td>' + val.reps + '</td>';
+                        content += '</tr>';
+                    };
+                    $("#datatable").append(content);
+                });
+            }
+        });
+    });
+</script>
+{% endblock %}

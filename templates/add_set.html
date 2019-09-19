@@ -1,0 +1,30 @@
+{% extends "layout.html" %} 
+{% block title %} Add Data {% endblock %}
+
+{% block body %}
+<div class="controls">
+    <form class="sucess-none form form-horizontal" id="addSet">
+        <div class="form-group"><div class="col-md-3"><fieldset>
+            <legend>Personal information:</legend>
+            Name:<br>
+            <input type="text" id="name" class="form-control" value="Asher"><br>
+            Date:<br>
+            <input class="form-control" type="date" id="date"><br>
+            Lift:<br>
+            <select class="form-control" id="lift">
+                <option value="db_bench">DB Bench</option>
+                <option value="db_ohp">DB OHP</option>
+                <option value="db_row">DB Row</option>
+                <option value="pull_ups">Pull Ups</option>
+                <option value="leg_press">Leg Press</option>
+                <option value="db_rdl">DB RDL</option>
+            </select><br>
+            Weight:<br>
+            <input type="number" id="weight" class="form-control" value="0"><br>
+            Reps:<br>
+            <input type="number" id="reps" class="form-control" value="0"><br>
+            <input type="submit" class="form-control btn" value="Submit">
+        </fieldset></div></div>
+    </form>
+</div>
+{% endblock %}
