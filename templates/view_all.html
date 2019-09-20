@@ -7,7 +7,8 @@
 {% include "back_button.html" %}
 
 <h2>Select User (Unimplemented)</h2>
-<select>
+<select id="id_user_select">
+    <option value="all">All Users</option>
     <option value="asher_mancinelli">Asher Mancinelli</option>
     <option value="other">Other</option>
 </select>
@@ -40,36 +41,46 @@
 <script>
     window.addEventListener('DOMContentLoaded', (event) => {
         var db = firebase.database();
-        db.ref().once('value', (snapshot) => {
-            if (snapshot.exists()) {
-                snapshot.forEach((_data) => {
-                    var data = _data.val();
-                    for (var k in data) {
-                        val = data[k];
-                        content = ''
-                        console.log(val.date, moment().format('YYYY-MM-DD'));
-                        if (val.date == moment().format('YYYY-MM-DD')) {
-                            content += '<tr>';
-                            content += '<td>' + val.name + '</td>';
-                            content += '<td>' + val.lift + '</td>';
-                            content += '<td>' + val.weight + '</td>';
-                            content += '<td>' + val.reps + '</td>';
-                            content += '</tr>';
-                            $("#id_todays_data").append(content);
-                        } else {
-                            content += '<tr>';
-                            content += '<td>' + val.name + '</td>';
-                            content += '<td>' + val.date + '</td>';
-                            content += '<td>' + val.lift + '</td>';
-                            content += '<td>' + val.weight + '</td>';
-                            content += '<td>' + val.reps + '</td>';
-                            content += '</tr>';
-                            $("#id_old_data").append(content);
-                        }
-                    };
-                });
-            }
-        });
+
+        function populateTables() {
+            $(".tmp").remove();
+            var user = $("#id_user_select").val();
+            db.ref().once('value', (snapshot) => {
+                if (snapshot.exists()) {
+                    snapshot.forEach((_data) => {
+                        var data = _data.val();
+                        for (var k in data) {
+                            val = data[k];
+                            content = ''
+                            if (user == 'all' || user == val.name) {
+                                if (val.date == moment().format('YYYY-MM-DD')) {
+                                    content += '<tr class="tmp">';
+                                    content += '<td>' + val.name + '</td>';
+                                    content += '<td>' + val.lift + '</td>';
+                                    content += '<td>' + val.weight + '</td>';
+                                    content += '<td>' + val.reps + '</td>';
+                                    content += '</tr>';
+                                    $("#id_todays_data").append(content);
+                                } else {
+                                    content += '<tr class="tmp">';
+                                    content += '<td>' + val.name + '</td>';
+                                    content += '<td>' + val.date + '</td>';
+                                    content += '<td>' + val.lift + '</td>';
+                                    content += '<td>' + val.weight + '</td>';
+                                    content += '<td>' + val.reps + '</td>';
+                                    content += '</tr>';
+                                    $("#id_old_data").append(content);
+                                }
+                            }
+                        };
+                    });
+                }
+            });
+        }
+
+        populateTables();
+        document.getElementById('id_user_select').addEventListener('change', populateTables);
     });
+
 </script>
 {% endblock %}
