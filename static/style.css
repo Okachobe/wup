@@ -7,3 +7,7 @@ body {
 div, .btn, table, tr, th, td {
     color: white;
 }
+
+#picker {
+    color: white;
+}

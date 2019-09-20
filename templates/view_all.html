@@ -5,7 +5,29 @@
 
 {% block body %}
 {% include "back_button.html" %}
-<table class="table" style="width:100%" id="datatable">
+
+<h2>Select User (Unimplemented)</h2>
+<select>
+    <option value="asher_mancinelli">Asher Mancinelli</option>
+    <option value="other">Other</option>
+</select>
+
+<br> <br>
+
+<h2>Today's Data</h2>
+<table class="table" style="width:100%" id="id_todays_data">
+    <tr id="header-row">
+        <th>Name</th>
+        <th>Lift</th>
+        <th>Weight</th>
+        <th>Reps</th>
+    </tr>
+</table>
+
+<br><br>
+
+<h2>Previous Day's Data</h2>
+<table class="table" style="width:100%" id="id_old_data">
     <tr id="header-row">
         <th>Name</th>
         <th>Date</th>
@@ -20,22 +42,31 @@
         var db = firebase.database();
         db.ref().once('value', (snapshot) => {
             if (snapshot.exists()) {
-                var content = '';
-                console.log(snapshot);
                 snapshot.forEach((_data) => {
                     var data = _data.val();
-                    console.log(data);
                     for (var k in data) {
                         val = data[k];
-                        content += '<tr>';
-                        content += '<td>' + val.name + '</td>';
-                        content += '<td>' + val.date + '</td>';
-                        content += '<td>' + val.lift + '</td>';
-                        content += '<td>' + val.weight + '</td>';
-                        content += '<td>' + val.reps + '</td>';
-                        content += '</tr>';
+                        content = ''
+                        console.log(val.date, moment().format('YYYY-MM-DD'));
+                        if (val.date == moment().format('YYYY-MM-DD')) {
+                            content += '<tr>';
+                            content += '<td>' + val.name + '</td>';
+                            content += '<td>' + val.lift + '</td>';
+                            content += '<td>' + val.weight + '</td>';
+                            content += '<td>' + val.reps + '</td>';
+                            content += '</tr>';
+                            $("#id_todays_data").append(content);
+                        } else {
+                            content += '<tr>';
+                            content += '<td>' + val.name + '</td>';
+                            content += '<td>' + val.date + '</td>';
+                            content += '<td>' + val.lift + '</td>';
+                            content += '<td>' + val.weight + '</td>';
+                            content += '<td>' + val.reps + '</td>';
+                            content += '</tr>';
+                            $("#id_old_data").append(content);
+                        }
                     };
-                    $("#datatable").append(content);
                 });
             }
         });
