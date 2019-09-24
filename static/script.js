@@ -1,15 +1,7 @@
 'use strict'; 
 window.addEventListener('load', () => { 
     var b = firebase.database().ref("set");
-    // document.getElementById('date').valueAsDate = new Date();
     $("#picker").datepicker();
-    /*$("#date").datepicker({
-        maxDate: moment(),
-        allowInputToggle: true,
-        enabledHours : false,
-        locale: moment().local('en'),
-        format: 'MM/DD/YYYY'
-    });*/
     if ($('#addSet').length > 0) {
         $("#addSet").submit((a) => {
             $(this), console.log("Pushing to firebase");
@@ -17,7 +9,7 @@ window.addEventListener('load', () => {
                 weight = $("#weight").val(),
                 lift = $("#lift").val(),
                 date = $("#date").val(),
-                name = $("#name").val(),
+                name = Cookies.get('username'),
                 set = {
                     date: date,
                     name: name,
@@ -25,11 +17,7 @@ window.addEventListener('load', () => {
                     lift: lift,
                     weight: weight
                 };
-            console.log("Name: ", name);
             return b.push(set).then((a) => {
-                // display sucess message or something
-                // $(".sucess").css("display", "block");
-                // $(".sucess-none").css("display", "none");
                 alert('Successfully submitted data.');
             }), false })
     }
