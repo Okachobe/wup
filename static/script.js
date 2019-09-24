@@ -1,6 +1,6 @@
 'use strict'; 
 window.addEventListener('load', () => { 
-    var b = firebase.database().ref("set");
+    var b = firebase.database().ref("set/" + Cookies.get('username'));
     $("#picker").datepicker();
     if ($('#addSet').length > 0) {
         $("#addSet").submit((a) => {

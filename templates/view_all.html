@@ -29,7 +29,7 @@
 
 <br><br>
 
-<h2>Previous Day's Data</h2>
+<h2>Previous Day's Data (Limit 25)</h2>
 <table class="table" style="width:100%" id="id_old_data">
     <tr id="header-row">
         <th>Date</th>
@@ -43,43 +43,36 @@
     window.addEventListener('DOMContentLoaded', (event) => {
         var db = firebase.database();
 
-        function populateTables() {
-            $(".tmp").remove();
-            var user = Cookies.get('username');
-            db.ref('set').limit(25).on('value', (snapshot) => {
-                if (snapshot.exists()) {
-                    var data = snapshot.val();
-                    for (var k in data) {
-                        val = data[k];
-                        content = ''
-                        if (user == val.name) {
-                            if (val.date == moment().format('YYYY-MM-DD')) {
-                                content += '<tr class="tmp">';
-                                content += '<td>' + val.name + '</td>';
-                                content += '<td>' + val.lift + '</td>';
-                                content += '<td>' + val.weight + '</td>';
-                                content += '<td>' + val.reps + '</td>';
-                                content += '</tr>';
-                                $("#id_todays_data").append(content);
-                            } else {
-                                content += '<tr class="tmp">';
-                                content += '<td>' + val.name + '</td>';
-                                content += '<td>' + val.date + '</td>';
-                                content += '<td>' + val.lift + '</td>';
-                                content += '<td>' + val.weight + '</td>';
-                                content += '<td>' + val.reps + '</td>';
-                                content += '</tr>';
-                                $("#id_old_data").append(content);
-                            }
+        $(".tmp").remove();
+        var user = Cookies.get('username');
+        db.ref('set/' + user).limitToLast(25).on('value', (snapshot) => {
+            if (snapshot.exists()) {
+                var data = snapshot.val();
+                for (var k in data) {
+                    val = data[k];
+                    content = ''
+                    if (user == val.name) {
+                        if (val.date == moment().format('YYYY-MM-DD')) {
+                            content += '<tr class="tmp">';
+                            content += '<td>' + val.lift + '</td>';
+                            content += '<td>' + val.weight + '</td>';
+                            content += '<td>' + val.reps + '</td>';
+                            content += '</tr>';
+                            $("#id_todays_data").append(content);
+                        } else {
+                            content += '<tr class="tmp">';
+                            content += '<td>' + val.date + '</td>';
+                            content += '<td>' + val.lift + '</td>';
+                            content += '<td>' + val.weight + '</td>';
+                            content += '<td>' + val.reps + '</td>';
+                            content += '</tr>';
+                            $("#id_old_data").append(content);
                         }
-                    };
-                    
-                }
-            });
-        }
-
-        populateTables();
-        document.getElementById('id_user_select').addEventListener('change', populateTables);
+                    }
+                };
+                
+            }
+        });
     });
 
 </script>
