@@ -45,6 +45,10 @@
 
         $(".tmp").remove();
         var user = Cookies.get('username');
+        if (user == "demo") {
+            alert('This is where your logged data would show up if you had an account.');
+            return;
+        }
         db.ref('set/' + user).limitToLast(25).on('value', (snapshot) => {
             if (snapshot.exists()) {
                 var data = snapshot.val();

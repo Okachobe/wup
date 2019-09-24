@@ -3,6 +3,7 @@
 {% block title %} WUP {% endblock %}
 
 {% block body %}
+
 <main role="main" class="inner-cover">
     <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" id="login">
         <div class="panel panel-info">
@@ -34,7 +35,7 @@
 
     <br> <br>
 
-    <div class="main-page" style="display:none;" id="main-page">
+    <div class="main-page" style="display:none;">
         <h1 class="cover-heading">Choose what you'd like to do:</h1>
         <p class="lead">
             You may either see workout data already entered or you may log new workouts.
@@ -52,8 +53,8 @@
     window.addEventListener('load', () => {
 
         if (Cookies.get('username')) {
-            document.getElementById("login").style.display = "none";
-            document.getElementById("main-page").style.display = "block";
+            $("#login").hide();
+            $(".main-page").show();
         } else {
             firebase.database().ref('user').on('value', (snapshot) => {
                 if (snapshot.exists()) {
@@ -72,6 +73,15 @@
             found = false,
             fn = "";
 
+        if (un == 'demo') {
+            Cookies.set("username", un);
+            Cookies.set("fullname", "Demo");
+            $("#login").hide();
+            $(".main-page").show();
+            alert('You are now in demo mode. You can\'t add data but you can play with all the features.');
+            return;
+        }
+
         users.forEach((el) => {
             if (!found) {
                 if (el.un == un) {
@@ -84,8 +94,8 @@
         if (found) {
             Cookies.set("username", un);
             Cookies.set("fullname", fn);
-            document.getElementById("login").style.display = "none";
-            document.getElementById("main-page").style.display = "block";
+            $("#login").hide();
+            $(".main-page").show();
         } else {
             alert("Username not in database. If you think this is a mistake, contact me and I'll add you back in.");
         }

@@ -1,9 +1,14 @@
+<script>
 'use strict'; 
 window.addEventListener('load', () => { 
     var b = firebase.database().ref("set/" + Cookies.get('username'));
     $("#picker").datepicker();
     if ($('#addSet').length > 0) {
         $("#addSet").submit((a) => {
+            if (Cookies.get('username') == 'demo') {
+                alert('Pressing submit would save your data if you had a real account, but no data is actually added since you don\'t have one yet.');
+                return;
+            }
             $(this), console.log("Pushing to firebase");
             var reps = $("#reps").val(),
                 weight = $("#weight").val(),
@@ -22,3 +27,4 @@ window.addEventListener('load', () => {
             }), false })
     }
 });
+</script>

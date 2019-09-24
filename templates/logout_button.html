@@ -1,0 +1,9 @@
+<button type="button" class="bg-dark btn" onclick="logout()">Log out</button>
+
+<script>
+    function logout() {
+        Cookies.remove('username');
+        Cookies.remove('fullname');
+        window.location.replace("/");
+    }
+</script>
