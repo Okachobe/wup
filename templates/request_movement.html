@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}Request a New Movement{% endblock %}
+
+{% block body %}
+{% include "back_button.html" %}
+
+<div class="container">
+    <div id="mainbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <form class="sucess-none form form-horizontal" id="reqMov">
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            Input desired movement:<br>
+                            <input class="form-control" type="text" id="mov-name"><br>
+                        </div>
+                    </div>
+
+                    <div class="form-check">
+                        <div class="col-md-10">
+                            <label class="checkbox-inline form-check-label" for="isPrim">
+                                <input class="form-check-input" type="checkbox" id="isPrim">
+                                Primary Movement
+                            </label>
+                        </div>
+                    </div>
+
+                    <br><br>
+
+                    <button class="bg-dark btn btn-primary" type="submit" id="reqMov" name="submit">Submit</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+'use strict';
+window.addEventListener('load', () => {
+    if (Cookies.get('username') == 'demo') {
+        alert('Pressing submit would save your data if you had a real account, but no data is actually added since you don\'t have one yet.');
+        return;
+    }
+    var ref = firebase.database().ref('requested_movements/' + Cookies.get('username'));
+    $("#reqMov").submit((a) => {
+        return ref.push({
+            movement_name: $("#mov-name").val(),
+            is_primary_mov: $("#isPrim").is(':checked')
+        }).then((a) => {
+            alert('Successfully submitted request.')
+        }, false);
+    });
+});
+</script>
+{% endblock %}
