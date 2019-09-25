@@ -1,0 +1,3 @@
+### Weekly Undulating Periodization
+
+
